@@ -1,19 +1,37 @@
-import React from 'react'
-import Star from '../star'
+import React, { useState } from 'react';
+import Star from '../star';
 
-const range = (number) => Array.from(new Array(number), (x, i) => i)
+const StarWrapper = ({ starCount }) => {
 
-const starWrapper = ({ starCount }) => {
-    return (
-        <div>
-            {range(starCount).map((i, index) => (
-                <Star
-                    key={index}
-                    isLit={index === 0}
-                />
-            ))}
-        </div>
-    )
+  const [clickedID, setClickedID] = useState(-1);
+  const [hoveredID, setHoveredID] = useState(-1);
+
+  const range = (number) => {
+    return(     
+      Array.from(new Array(number), (x, i) => i)
+      )}
+    
+  return (
+    <div>
+      {range(starCount).map((starID, index) => {
+        
+        return (
+          <Star
+            key={index}
+            isLit={hoveredID >= starID || clickedID >= starID}
+            onClick={() => setClickedID(index)}
+            onHoverIn={()=>
+              setHoveredID(index)
+            }
+            onHoverOut={()=>
+              setHoveredID(-1)
+            }
+
+          />
+        )
+      })}
+    </div>
+  )
 }
 
-export default starWrapper;
+export default StarWrapper;
