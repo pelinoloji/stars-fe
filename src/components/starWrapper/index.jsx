@@ -14,19 +14,13 @@ const StarWrapper = ({ starCount }) => {
   return (
     <div>
       {range(starCount).map((starID, index) => {
-        
         return (
           <Star
             key={index}
             isLit={hoveredID >= starID || clickedID >= starID}
             onClick={() => setClickedID(index)}
-            onHoverIn={()=>
-              setHoveredID(index)
-            }
-            onHoverOut={()=>
-              setHoveredID(-1)
-            }
-
+            onHoverIn={()=>  setHoveredID(index)}
+            onHoverOut={()=>setHoveredID(-1)}
           />
         )
       })}
